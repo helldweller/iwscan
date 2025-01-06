@@ -19,20 +19,15 @@ def parseiwscan(iw_output):
                 continue
             output[bss] = obj
         if re.search("^\tSSID:", line):
-            ssid = re.findall(r'(?:^\tSSID: )(.*)', line)[0]
-            output[bss]["ssid"] = ssid
+            output[bss]["ssid"] = re.findall(r'(?:^\tSSID: )(.*)', line)[0]
         if re.search("^\tsignal:", line):
-            signal = re.findall(r'(?:^\tsignal: )(.*)(?:\ .*)', line)[0]
-            output[bss]["signal"] = signal
+            output[bss]["signal"] = re.findall(r'(?:^\tsignal: )(.*)(?:\ .*)', line)[0]
         if re.search("^\tfreq:", line):
-            freq = re.findall(r'(?:^\tfreq: )([0-9]*)', line)[0]
-            output[bss]["freq"] = freq
+            output[bss]["freq"] = re.findall(r'(?:^\tfreq: )([0-9]*)', line)[0]
         if re.search("^[\ |\t]*\*\ primary\ channel:", line):
-            channel = re.findall(r'(?:^[\ |\t]*\*\ primary\ channel: )([0-9]*)', line)[0]
-            output[bss]["channel"] = channel
+            output[bss]["channel"] = re.findall(r'(?:^[\ |\t]*\*\ primary\ channel: )([0-9]*)', line)[0]
         if re.search("^\t\t\ \*\ station\ count:", line):
-            sta = re.findall(r'(?:^\t\t\ \*\ station\ count: )([0-9]*)', line)[0]
-            output[bss]["stations"] = sta
+            output[bss]["stations"] = re.findall(r'(?:^\t\t\ \*\ station\ count: )([0-9]*)', line)[0]
     return output
 
 def json2prom(parsed):
